@@ -1,0 +1,1 @@
+the arrays in the react state must not be update by push we should copy the previous state array and then update the state
