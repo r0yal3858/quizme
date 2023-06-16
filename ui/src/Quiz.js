@@ -12,15 +12,12 @@ import { Timer } from "./timer/Timer";
 import "./Quiz.css";
 export const Question = () => {
   const [questions, setQuestions] = useState([]);
-  const [answers, setAnswer] = useState([]);
   const [quizType, setQuizType] = useState("all");
-  const [origQuizType, setOrigQuizType] = useState("all");
   const [startTime, setStartTime] = useState();
 
-  // let quizType = ["all", "one"];
-  // quizType = "all at once";
   let seed = [
     {
+      bookmark: 0,
       questionId: 1,
       question: " Who developed Python Programming Language?",
       options: [
@@ -33,6 +30,7 @@ export const Question = () => {
       questionType: "multiple",
     },
     {
+      bookmark: 0,
       questionId: 2,
       question: "Which type of Programming does Python support?",
       options: [
@@ -45,6 +43,7 @@ export const Question = () => {
       questionType: "single",
     },
     {
+      bookmark: 0,
       questionId: 3,
       question: "Which type of Programming does Python support?",
       options: [
@@ -57,6 +56,7 @@ export const Question = () => {
       questionType: "text",
     },
     {
+      bookmark: 0,
       questionId: 4,
       question: "Which type of Programming does Python support?",
       options: [
@@ -69,6 +69,7 @@ export const Question = () => {
       questionType: "text",
     },
     {
+      bookmark: 0,
       questionId: 5,
       question: "Which type of Programming does Python support?",
       options: [
@@ -81,6 +82,7 @@ export const Question = () => {
       questionType: "text",
     },
     {
+      bookmark: 0,
       questionId: 6,
       question: "Which type of Programming does Python support?",
       options: [
@@ -93,6 +95,7 @@ export const Question = () => {
       questionType: "text",
     },
     {
+      bookmark: 0,
       questionId: 7,
       question: "Which type of Programming does Python support?",
       options: [
@@ -105,6 +108,7 @@ export const Question = () => {
       questionType: "text",
     },
     {
+      bookmark: 0,
       questionId: 8,
       question: "Which type of Programming does Python support?",
       options: [
@@ -121,14 +125,18 @@ export const Question = () => {
   // this function is to register the answer if the user edits the same question it will register the new ans
   const ans = (event) => {
     let questionId = event.target.id.split("_$_")[0];
-    let selectedOption = event.target.innerHTML || event.target.value;
+    let selectedOption = event.target.innerHTML;
 
     questions.map((x, y) => {
       if (
         x.questionId == questionId &&
         (x.questionType == "single" || x.questionType == "text")
       ) {
-        x.selectedOption = [selectedOption];
+        x.selectedOption = [
+          x.questionType === "text"
+            ? event.target.value
+            : event.target.innerHTML,
+        ];
       } else if (x.questionId == questionId && x.questionType == "multiple") {
         if (x.selectedOption.includes(selectedOption)) {
           x.selectedOption.splice(x.selectedOption.indexOf(selectedOption), 1);
@@ -137,7 +145,7 @@ export const Question = () => {
         }
       }
     });
-
+    console.log(questions);
     setQuestions([...questions]);
   };
   const comp = () => {
@@ -149,6 +157,7 @@ export const Question = () => {
             submitAnswers={ans}
             setQuizType={setQuizType}
             quizType={quizType}
+            setQuestions={setQuestions}
           ></AllQuestions>
         );
       case "one":

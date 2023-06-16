@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./CreateQuiz.css";
 
+//adding settings to the quiz, time, deadline, type of quiz, provide hint to the question
 export const CreateQuiz = () => {
   const [questions, setQuestions] = useState([]);
   const [options, setOptions] = useState([]);
@@ -122,6 +123,7 @@ export const CreateQuiz = () => {
             ) : null}
           </>
         )}
+        <input type="text" placeholder="want to provide hint" name="hint" />
         <button>add question</button>
       </form>
       {errors?.map((x) => (
@@ -160,6 +162,19 @@ export const CreateQuiz = () => {
             </button>
           </span>
         ))}
+      </div>
+      <div id="testSettings">
+        <h2>Test Settings</h2>
+        <p>test deadline</p>
+        <p>test duration</p>
+        <p>Test questions display type</p>
+        <select name="quizType">
+          <option value="all">All questions at once</option>
+          <option value="one">one question at a time</option>
+          <option value="one no back">
+            one question at a time but cant visit previous question
+          </option>
+        </select>
       </div>
     </>
   );

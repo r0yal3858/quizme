@@ -1,64 +1,94 @@
 import "./AllQuestions.css";
 export const AllQuestions = ({
   questions,
+  setQuestions,
   submitAnswers,
   quizType,
   setQuizType,
 }) => {
+  const setBookmark = (event) => {
+    let bookmarkId = event.target.getAttribute("value");
+    questions.map((x, y) => {
+      if (x.questionId == bookmarkId) {
+        x.bookmark = x.bookmark ? 0 : 1;
+      }
+    });
+    setQuestions([...questions]);
+  };
+  const clearAnswer = (event) => {
+    let ans = event.target.getAttribute("value");
+    questions.map((x, y) => {
+      if (x.questionId == ans) {
+        x.selectedOption = [];
+      }
+    });
+    setQuestions([...questions]);
+  };
   return (
     <>
-      <div id="container">
+      <div id="containerAll">
         <div id="questions">
-          {quizType === "all" ? (
-            <button onClick={() => setQuizType("one")}>
-              switch to one question view
-            </button>
-          ) : null}
           {questions.map((x, y) => (
             <>
-              <h3 id={x.questionId}>{x.question}</h3>
-              <p>
-                {
-                  {
-                    multiple: "multiple choice mutiple answer",
-                    single: "multiple choice single answer",
-                    text: "enter your answer maximum words 200",
-                  }[x.questionType]
-                }
-              </p>
-              <span>
-                {x.questionType == "text" ? (
-                  <textarea
-                    cols="100"
-                    rows="10"
-                    placeholder="enter your answer"
-                    name={`${questions[y].questionId}_$_0`}
-                    id={`${questions[y].questionId}_$_0`}
-                    maxLength="200"
-                    onBlur={(event) => {
-                      submitAnswers(event);
-                    }}
-                  ></textarea>
-                ) : (
-                  x.options.map((x, z) => (
-                    <button
-                      onClick={(event) => {
-                        submitAnswers(event);
-                        console.log(questions);
-                      }}
-                      id={`${questions[y].questionId}_$_${z}`}
-                      key={`${questions[y].questionId}_$_${z}`}
-                      className={
-                        questions[y].selectedOption.includes(x)
-                          ? "isSelected"
-                          : "notSelected"
-                      }
-                    >
-                      {x}
+              <div id="questionAll">
+                <span id="questionArea">
+                  <h3 id={x.questionId}>{x.question}</h3>
+
+                  {x.questionType !== "text" ? (
+                    <button onClick={clearAnswer} value={x.questionId}>
+                      clear
                     </button>
-                  ))
-                )}
-              </span>
+                  ) : null}
+                  <p onClick={setBookmark} value={x.questionId}>
+                    🔖
+                  </p>
+                </span>
+                <p>
+                  {
+                    {
+                      multiple: "multiple choice mutiple answer",
+                      single: "multiple choice single answer",
+                      text: "enter your answer maximum words 200",
+                    }[x.questionType]
+                  }
+                </p>
+                <span id="options">
+                  {x.questionType == "text" ? (
+                    <textarea
+                      cols="100"
+                      rows="10"
+                      placeholder="enter your answer"
+                      name={`${questions[y].questionId}_$_0`}
+                      id={`${questions[y].questionId}_$_0`}
+                      maxLength="200"
+                      onChange={(event) => {
+                        console.log("(?");
+                        submitAnswers(event);
+                      }}
+                    >
+                      {x.selectedOption[0]}
+                    </textarea>
+                  ) : (
+                    x.options.map((x, z) => (
+                      <button
+                        onClick={(event) => {
+                          submitAnswers(event);
+                          console.log(questions);
+                        }}
+                        id={`${questions[y].questionId}_$_${z}`}
+                        key={`${questions[y].questionId}_$_${z}`}
+                        className={
+                          questions[y].selectedOption.includes(x)
+                            ? "isSelected"
+                            : "notSelected"
+                        }
+                      >
+                        {x}
+                      </button>
+                    ))
+                  )}
+                </span>
+              </div>
             </>
           ))}
           <button onClick={() => setQuizType("preview")}>Submit</button>
@@ -77,7 +107,7 @@ export const AllQuestions = ({
                       name="question index"
                       style={{ display: "none " }}
                     />
-                    question{y + 1}
+                    question{`${y + 1} ${x.bookmark ? "🔖" : ""}`}
                   </button>
                 </a>
               </label>
@@ -89,6 +119,11 @@ export const AllQuestions = ({
           >
             Submit
           </button>
+          {quizType === "all" ? (
+            <button onClick={() => setQuizType("one")}>
+              one question view
+            </button>
+          ) : null}
         </div>
       </div>
     </>

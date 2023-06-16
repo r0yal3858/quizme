@@ -34,7 +34,6 @@ fieldset {
 span {
   display: flex;
   flex-direction: column;
-  background-color: beige;
 }
 .isSelected {
   background-color: aqua;
