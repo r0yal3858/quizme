@@ -18,6 +18,7 @@ export const Question = () => {
   let seed = [
     {
       bookmark: 0,
+      marks: 1,
       questionId: 1,
       question: " Who developed Python Programming Language?",
       options: [
@@ -31,6 +32,7 @@ export const Question = () => {
     },
     {
       bookmark: 0,
+      marks: 1,
       questionId: 2,
       question: "Which type of Programming does Python support?",
       options: [
@@ -44,6 +46,7 @@ export const Question = () => {
     },
     {
       bookmark: 0,
+      marks: 1,
       questionId: 3,
       question: "Which type of Programming does Python support?",
       options: [
@@ -57,6 +60,7 @@ export const Question = () => {
     },
     {
       bookmark: 0,
+      marks: 1,
       questionId: 4,
       question: "Which type of Programming does Python support?",
       options: [
@@ -70,6 +74,7 @@ export const Question = () => {
     },
     {
       bookmark: 0,
+      marks: 1,
       questionId: 5,
       question: "Which type of Programming does Python support?",
       options: [
@@ -83,6 +88,7 @@ export const Question = () => {
     },
     {
       bookmark: 0,
+      marks: 1,
       questionId: 6,
       question: "Which type of Programming does Python support?",
       options: [
@@ -96,6 +102,7 @@ export const Question = () => {
     },
     {
       bookmark: 0,
+      marks: 1,
       questionId: 7,
       question: "Which type of Programming does Python support?",
       options: [
@@ -109,8 +116,24 @@ export const Question = () => {
     },
     {
       bookmark: 0,
+      marks: 1,
       questionId: 8,
       question: "Which type of Programming does Python support?",
+      options: [
+        "object-oriented programming",
+        "structured programming",
+        "functional programming",
+        "all of the mentioned",
+      ],
+      selectedOption: [],
+      questionType: "text",
+    },
+    {
+      bookmark: 0,
+      marks: 1,
+      questionId: 8,
+      question:
+        "Python is a versatile programming language widely used in various domains. With its clean syntax, extensive standard library, and wide range of third-party libraries, Python has gained immense popularity among developers. It supports multiple programming paradigms, including procedural, object-oriented, and functional programming. One of Python's key features is its dynamic typing, allowing flexibility in variable assignment without explicit type declarations. Python offers a plethora of built-in data types such as integers, floats, strings, lists, tuples, dictionaries, and sets. Additionally, it provides advanced features like list comprehensions, generators, decorators, and exception handling. Python's simplicity, readability, and extensive ecosystem make it a top choice for web development, scientific computing, data analysis, machine learning, and automation.",
       options: [
         "object-oriented programming",
         "structured programming",

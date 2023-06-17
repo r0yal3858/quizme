@@ -9,7 +9,6 @@ export const CreateQuiz = () => {
   const [errors, setErrors] = useState([]);
   const addQuestion = (event) => {
     let error = [];
-    let conp = [];
     let question = {};
 
     event.preventDefault();
@@ -19,7 +18,10 @@ export const CreateQuiz = () => {
       console.log(key, value);
       if (key == "question")
         value.length <= 5
-          ? (error = [...error, "question cannot be empty"])
+          ? (error = [
+              ...error,
+              "question length must be more that 5 characters",
+            ])
           : (question.question = value);
       console.log(options.includes(value), options);
       if (key == "correct") {
@@ -29,6 +31,14 @@ export const CreateQuiz = () => {
               "the correct answer must be part of the option",
             ])
           : (question.correct = value);
+      }
+      if (key == "hint") {
+        value.length && value.length <= 5
+          ? (error = [...error, "hint must atleast be 5characters and above"])
+          : (question.hint = value);
+      }
+      if (key == "marks") {
+        question.marks = parseFloat(value);
       }
     }
 
@@ -40,7 +50,7 @@ export const CreateQuiz = () => {
       setErrors([...error]);
       return;
     }
-    setOptions([]);
+
     setQuestions([
       ...questions,
       {
@@ -48,11 +58,14 @@ export const CreateQuiz = () => {
         options,
         questionType,
         correctAnswer: question.correct,
+        hint: question.hint,
+        marks: question.marks,
       },
     ]);
     setQuestionType("text");
     event.target.reset();
     setErrors([]);
+    setOptions([]);
   };
 
   const addOption = () => {
@@ -63,10 +76,19 @@ export const CreateQuiz = () => {
     }
   };
 
+  const submitForm = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+
+    for (let [key, value] of formData.entries()) {
+      console.log(key, value);
+    }
+  };
   const removeOption = (event) => {
     options.splice(options.indexOf(event.target.value), 1);
     setOptions([...options]);
   };
+  const currentDate = new Date().toISOString().split("T")[0];
   return (
     <>
       <h1>Creator Mode</h1>
@@ -124,6 +146,12 @@ export const CreateQuiz = () => {
           </>
         )}
         <input type="text" placeholder="want to provide hint" name="hint" />
+        <input
+          type="number"
+          placeholder="how many marks does this question worth "
+          min="0"
+          name="marks"
+        />
         <button>add question</button>
       </form>
       {errors?.map((x) => (
@@ -134,8 +162,11 @@ export const CreateQuiz = () => {
         {questions.map((x, y) => (
           <span id="questionDisplayIn">
             <span>
+              {console.log(x)}
               <p>Question : {x.question}</p>
+              <p>Marks : {x.marks || 1}</p>
               <p>Question Type : {x.questionType}</p>
+              {x.hint ? <p>Hint : {x.hint}</p> : null}
               {x.questionType == "text" ? null : (
                 <span>
                   <span>
@@ -165,8 +196,54 @@ export const CreateQuiz = () => {
       </div>
       <div id="testSettings">
         <h2>Test Settings</h2>
-        <p>test deadline</p>
-        <p>test duration</p>
+        <label>
+          test deadline
+          <input
+            type="date"
+            min={(function () {
+              return new Date().toISOString().split("T")[0];
+            })()}
+            max={(function () {
+              return new Date(Date.now() + 1000 * 60 * 60 * 24 * 45)
+                .toISOString()
+                .split("T")[0];
+            })()}
+          />
+        </label>
+        {
+          // <input type="date" id="myDateInput" min={currentDate} />
+        }
+
+        <label>
+          test duration
+          <form onSubmit={submitForm}>
+            <label for="hours">
+              hours:
+              <input
+                type="number"
+                name="hours"
+                placeholder="enter hours"
+                min="0"
+                max="4"
+                required
+              />
+            </label>
+            <label>
+              Minutes
+              <input
+                type="number"
+                name="minutes"
+                placeholder=" enter"
+                min="0"
+                max="59"
+                required
+              />
+            </label>
+
+            <button></button>
+          </form>
+        </label>
+
         <p>Test questions display type</p>
         <select name="quizType">
           <option value="all">All questions at once</option>

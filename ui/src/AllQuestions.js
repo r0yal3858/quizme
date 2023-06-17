@@ -31,7 +31,8 @@ export const AllQuestions = ({
           {questions.map((x, y) => (
             <>
               <div id="questionAll">
-                <span id="questionArea">
+                <span className="questionArea">
+                  <p>{`${x.marks} Marks`} </p>
                   <h3 id={x.questionId}>{x.question}</h3>
 
                   {x.questionType !== "text" ? (

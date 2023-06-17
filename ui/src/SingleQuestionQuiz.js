@@ -13,7 +13,7 @@ export const SingleQuestion = ({
     <>
       <div id="container">
         <div id="container1">
-          <div id="question">
+          <div className="questionAll">
             {quizType === "one" ? (
               <button onClick={() => setQuizType("all")}>switch to all</button>
             ) : null}
