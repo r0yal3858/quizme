@@ -70,3 +70,22 @@ h1 {
   font-size: larger;
   font-weight: bolder;
 }
+
+.instructionHover {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: bolder;
+  display: inline;
+}
+.instruction {
+  visibility: hidden;
+}
+.instructionHover:hover > .instruction {
+  background-color: antiquewhite;
+  visibility: visible;
+  position: static;
+  font-weight: normal;
+}
+
+#testSettings > * {
+  margin: 10px;
+}

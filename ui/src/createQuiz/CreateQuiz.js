@@ -150,6 +150,7 @@ export const CreateQuiz = () => {
           type="number"
           placeholder="how many marks does this question worth "
           min="0"
+          max="100"
           name="marks"
         />
         <button>add question</button>
@@ -197,7 +198,7 @@ export const CreateQuiz = () => {
       <div id="testSettings">
         <h2>Test Settings</h2>
         <label>
-          test deadline
+          Test Deadline
           <input
             type="date"
             min={(function () {
@@ -209,10 +210,13 @@ export const CreateQuiz = () => {
                 .split("T")[0];
             })()}
           />
+          <p className="instructionHover">
+            i
+            <p className="instruction">
+              The date of test must be within 45 days from today
+            </p>
+          </p>
         </label>
-        {
-          // <input type="date" id="myDateInput" min={currentDate} />
-        }
 
         <label>
           test duration

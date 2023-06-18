@@ -131,7 +131,7 @@ export const Question = () => {
     {
       bookmark: 0,
       marks: 1,
-      questionId: 8,
+      questionId: 9,
       question:
         "Python is a versatile programming language widely used in various domains. With its clean syntax, extensive standard library, and wide range of third-party libraries, Python has gained immense popularity among developers. It supports multiple programming paradigms, including procedural, object-oriented, and functional programming. One of Python's key features is its dynamic typing, allowing flexibility in variable assignment without explicit type declarations. Python offers a plethora of built-in data types such as integers, floats, strings, lists, tuples, dictionaries, and sets. Additionally, it provides advanced features like list comprehensions, generators, decorators, and exception handling. Python's simplicity, readability, and extensive ecosystem make it a top choice for web development, scientific computing, data analysis, machine learning, and automation.",
       options: [
@@ -191,6 +191,7 @@ export const Question = () => {
             submitAnswers={ans}
             setQuizType={setQuizType}
             quizType={quizType}
+            setQuestions={setQuestions}
           />
         );
       case "done":
@@ -215,11 +216,11 @@ export const Question = () => {
   }
 
   return (
-    <div>
+    <>
       {quizType == "done" || quizType == "preview" ? null : (
         <Timer setQuizType={setQuizType} startTime={startTime}></Timer>
       )}
       {comp()}
-    </div>
+    </>
   );
 };

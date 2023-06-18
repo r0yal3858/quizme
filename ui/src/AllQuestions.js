@@ -30,7 +30,7 @@ export const AllQuestions = ({
         <div id="questions">
           {questions.map((x, y) => (
             <>
-              <div id="questionAll">
+              <div className="questionAll">
                 <span className="questionArea">
                   <p>{`${x.marks} Marks`} </p>
                   <h3 id={x.questionId}>{x.question}</h3>
@@ -53,7 +53,7 @@ export const AllQuestions = ({
                     }[x.questionType]
                   }
                 </p>
-                <span id="options">
+                <span className="options">
                   {x.questionType == "text" ? (
                     <textarea
                       cols="100"
