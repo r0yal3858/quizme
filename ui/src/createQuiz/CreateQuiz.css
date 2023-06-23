@@ -79,7 +79,7 @@ h1 {
 .instruction {
   visibility: hidden;
 }
-.instructionHover:hover > .instruction {
+.instructionHover:hover + .instruction {
   background-color: antiquewhite;
   visibility: visible;
   position: static;

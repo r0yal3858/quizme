@@ -1,3 +1,29 @@
 div {
   height: 100vh;
 }
+
+.battery {
+  background: #000;
+  border-radius: 10px;
+  height: 2px;
+}
+
+.clock {
+  aspect-ratio: 1/1;
+  background-color: #000;
+  border-radius: 100% 0 0 100%/50% 0 0 50%;
+}
+.clock > .start,
+.moving {
+  position: relative;
+  background-color: white;
+  top: 50%;
+
+  transform-origin: bottom;
+}
+.start {
+  transform: rotate(-90deg);
+}
+.clock > div {
+  background-color: #fff;
+}

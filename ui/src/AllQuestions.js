@@ -30,7 +30,7 @@ export const AllQuestions = ({
         <div id="questions">
           {questions.map((x, y) => (
             <>
-              <div className="questionAll">
+              <div className="questionAll" key={`${y}_question`}>
                 <span className="questionArea">
                   <p>{`${x.marks} Marks`} </p>
                   <h3 id={x.questionId}>{x.question}</h3>
@@ -98,12 +98,11 @@ export const AllQuestions = ({
           <p>Jump to the question</p>
           <span>
             {questions.map((x, y) => (
-              <label>
+              <label key={`${y}_navigate`}>
                 <a href={`#${y + 1}`}>
                   <button>
                     <input
                       type="radio"
-                      key={y + 1}
                       value={y + 1}
                       name="question index"
                       style={{ display: "none " }}

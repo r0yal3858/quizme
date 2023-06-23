@@ -10,10 +10,12 @@ import { SingleQuestion } from "./SingleQuestionQuiz";
 import { PreviewSubmission } from "./previewQuiz/PreviewSubmission";
 import { Timer } from "./timer/Timer";
 import "./Quiz.css";
+
 export const Question = () => {
   const [questions, setQuestions] = useState([]);
   const [quizType, setQuizType] = useState("all");
-  const [startTime, setStartTime] = useState();
+  const [startTime, setStartTime] = useState("");
+  const [battery, setBattery] = useState("");
 
   let seed = [
     {
@@ -209,7 +211,7 @@ export const Question = () => {
   useEffect(() => {
     setQuestions(seed);
     setStartTime(Date.now());
-    console.log("running");
+    document.getElementById("Title").innerHTML = "Quiz";
   }, []);
   if (questions.length == 0) {
     return <p>loading</p>;
